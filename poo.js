@@ -27,6 +27,10 @@ class Caneta {
 
 class Caneta2 extends Caneta {
     botaoApertado = false;
+
+}
+
+class Caneta3 extends Caneta2 {
     
 }
 
