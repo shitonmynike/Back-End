@@ -27,6 +27,11 @@ class Caneta {
 
 class Caneta2 extends Caneta {
     botaoApertado = false;
+    escrevr(){
+        super.escrever();
+        console.log("escreveu bastante2");
+        this.vazia = true;
+    }
 
 }
 
