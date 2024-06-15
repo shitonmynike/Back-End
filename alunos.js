@@ -21,17 +21,44 @@ $(document).ready(function(){
         let ver_email = $("#email").val();
         let ver_cid = $("#cidade").val();
 
+        let dados = {
+            nome: ver_nome,
+            telefone: ver_tel,
+            email: ver_email,
+            cidade: ver_cid
+        };
+        
+        
+        
+        $("#nome, #telefone, #email, #cidade").removeClass("is-invalid");
+        
+        
 
-        let cep = /^[0-9]{5}-[0-9]{3}/gm;
+        let tel_exp = /^\([0-9]{2}\)[0-9]{4,5}-[0-9]{4}/gm;
+        let email_exp = /^[0-9a-zA-Z-._]+@[a-z0-9]+\.[a-z.]+$/gm;
+        
 
-        if(cep.test(ver_nome) == true)
+
+
+
+
+        if(tel_exp.test(ver_tel) == false)
         {
-            alert("passou no teste");
-        }else{
-            alert("não passou");
+            $("#telefone").addClass("is-invalid");
+        }
+        if(email_exp.test(ver_email) == false)
+        {
+            $("#email").addClass("is-invalid");
         }
 
-        $("#nome").removeClass("is-invalid");
+
+
+
+
+
+
+
+        nome
 
         if(ver_cid.trim().length <= 3)
         {
@@ -49,7 +76,26 @@ $(document).ready(function(){
         {
             $("#nome").addClass("is-invalid");
         }
+
+
+        $.post("http://localhost:3003/cadastrar" , dados , function(erro, resposta){
+            console.log(erro,resposta);
+        });
         
     }); //fim do bt-salvar
+
+    $("#telefone").keydown(function(ev){
+        
+        
+        let verificar = /^[0-9-\(\)]+/gm;
+        
+
+
+       if(verificar.test(ev.key) == false & ev.key != "Backspace")
+        {
+            return false;
+        } 
+
+    });//fim do keydown
 
 });
