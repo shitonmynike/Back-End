@@ -1,49 +1,36 @@
 const express = require("express");
 const cors = require("cors");
+const mongodb = require("mongodb");
+
+const url_con = "mongodb+srv://shitonmynike:082501@joao.zzcjhw9.mongodb.net/";
+const database = "joao";
+
+const bd = new mongodb.MongoClient(url_con);
+
 const app = express();
+
+app.use(express.json());
+app.use(express.urlencoded({extended: true }));
 app.use(cors());
 
 // router -> rota
-app.get("/alunos", function(req, res){
+app.get("/alunos", async function(req, res){
 
-    let lista = [
-        {
-            nome: "Pedro",
-            email: "pedro@aluno.com",
-            cidade: "Curitiba",
-            telefone:"(11)1234-4321",
-        },
-        {
-            nome: "Mauro",
-            email: "mauro@aluno.com",
-            cidade: "Morretes",
-            telefone:"(11)9999-4321",
-        },
-        {
-            nome: "Mateus",
-            email: "mateus@aluno.com",
-            cidade: "Pinhais",
-            telefone:"(11)3333-4321",
-        },
-        {
-            nome: "Maria",
-            email: "maria@aluno.com",
-            cidade: "Campo Largo",
-            telefone:"(11)4444-4321",
-        }
+    const pasta = bd.db(database).collection("alunos");    
+    let retorno = await pasta.find({}).sort({nome: 1, cidade: 1});
 
-    ];
-
-
-
+    let lista = await retorno.toArray();
     res.json(lista);
+
+
 });
 app.get("/", function(req, res){
     res.send("Pagina inicial");
 })
 
 app.post("/cadastrar" , function(req , res){
-    res.send("dados enviados");
+    
+    res.json(req.body);
 });
 
 
