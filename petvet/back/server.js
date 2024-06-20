@@ -1,26 +1,16 @@
 const express = require("express");
 const app = express();
 
-const cadServico = require("./model/servico").cadastrar;
+app.use(express.json());
+app.use(express,express.urlencoded({extended : true}));
+// const servico = require("./controller/servico");
 
-app.post("/servico" , async function(req , res){
-    let exe = {
-        nome: "Banho",
-        preco: 40.00,
-        profissional: "joao",
-        tipo: "Pet"
-    };
-
-     let retorno = await cadServico(exe);
-
-     res.json(retorno);
+// app.use("/servico" , servico);
 
 
 
-});
 
-
-app.listen(3000, function(){
+app.listen(3003, function(){
     console.log("começou");
 });
 

@@ -7,13 +7,25 @@
 
 
 const mongodb = require("mongodb");
-const url_con = "mongodb+srv://shitonmynike:082501@joao.zzcjhw9.mongodb.net/";
+const url_con = "mongodb+srv://shitonmynike:08112501@joao.zzcjhw9.mongodb.net/";
 const database = "joao"
 
 const mongo = new mongodb.MongoClient(url_con);
 const db = mongo.db(database).collection("servicos");
 
+const ObjectID =  mongodb.ObjectID;
 
+
+/**
+ * Deletar o serviço informado
+ * @param {string} id
+ */
+ async function deletar(id)
+{
+    let novo = new ObjectId(id);
+    return await db.deleteOne({_id:novo});
+    
+}
 
 /**
  * Cadastra um novo serviço
