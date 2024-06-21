@@ -7,13 +7,13 @@
 
 
 const mongodb = require("mongodb");
-const url_con = "mongodb+srv://shitonmynike:08112501@joao.zzcjhw9.mongodb.net/";
+const url_con = "mongodb+srv://shitonmynike:082501@joao.zzcjhw9.mongodb.net/";
 const database = "joao"
 
 const mongo = new mongodb.MongoClient(url_con);
 const db = mongo.db(database).collection("servicos");
 
-const ObjectID =  mongodb.ObjectID;
+const ObjectID =  mongodb.ObjectId;
 
 
 /**
@@ -22,7 +22,7 @@ const ObjectID =  mongodb.ObjectID;
  */
  async function deletar(id)
 {
-    let novo = new ObjectId(id);
+    let novo = new mongodb.ObjectId(id);
     return await db.deleteOne({_id:novo});
     
 }
@@ -57,20 +57,21 @@ async function listar()
  * @param {string} id 
  * @param {object} novo 
  */
-function alterar(id , novo)
+async function alterar(id , novo)
 {
-
+    novo.data_alterado = new Date();
+    let novoId = new mongodb.ObjectId(id);
+    let atualizacao = {
+        $set: novo
+    }
+    let retorno = await db.updateOne({_id:novoId} , atualizacao);
+    return retorno;
 }
 
 
-/**
- * Deleta o serviço
- * @param {object} id 
- */
-function deletar(id)
-{
 
-}
+
+
 
 module.exports = {
     listar: listar,
