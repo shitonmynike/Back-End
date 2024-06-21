@@ -11,7 +11,7 @@ $(document).ready(function(){
             +"<td>"+item.tipo+"</td>"
             +"<td>"
                 +'<button class="btn btn-outline-secondary">Alterar</button>'
-                +'<button class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#modal-delete" >Deletar</button>'
+                +'<button servico-id="'+ item._id +'" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#modal-delete" >Deletar</button>'
             +"</td>"
         +"</tr>"
                   
