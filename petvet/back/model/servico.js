@@ -34,7 +34,7 @@ const ObjectID =  mongodb.ObjectId;
 async function cadastrar(dados)
 {
     dados.data_cadastro = new Date();
-
+    dados.preco = parseFLoat(dados.preco);
 
     let retorno = await db.insertOne(dados);
     return retorno;
@@ -43,12 +43,20 @@ async function cadastrar(dados)
 
 
 /**
+ * @param {string} id | null
+ * @returns Array | Object
  * Lista todos os serviços
  */
-async function listar()
+async function listar(id)
 {
+
+    if(!id){
     let retorno = await db.find({});
     return await retorno.toArray();
+    }else{
+        let retorno = await db.findOne({_id: new mongodb.ObjectId(id)});
+        return retorno;
+    }
 }
 
 

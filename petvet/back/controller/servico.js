@@ -31,10 +31,35 @@ route.get("/lista" , async function(req , res) {
     res.json(retorno);
 }); 
 
+route.get("/ler/:id" , async function(req , res){
+    
+    
+    try
+    {
+        let id = req.params["id"];
+        let retorno = await listar(id);
+        res.json(retorno);
+    } catch{
+        res.status(500);
+        res.send("Ocorreu um problema no cadastro de dados");
+    }
+
+})
+
+
+
+
 route.post("/deleta/:id" , async function(req , res){
+    
+    try
+    {
     let id = req.params["id"];
     let retorno = await deletar(id);
     res.json(retorno);
+    } catch{
+        res.status(500);
+        res.send("Ocorreu um problema no cadastro de dados");
+    }
 });
 
 route.post("/altera/:id" , async function(req , res){
@@ -49,7 +74,7 @@ route.post("/altera/:id" , async function(req , res){
         res.send("Ocorreu um problema no cadastro de dados");
     }
 
-})
+});
 
 
 
