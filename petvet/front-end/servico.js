@@ -1,5 +1,5 @@
 let ambiente = (location.hostname == "localhost")? "dev" : "prod";
-let servidor = (ambiente == prod)?  "https://petvet-back-sjv0.onrender.com" : "http://localhost:3003/servico"
+let servidor = (ambiente == "prod")?  "https://petvet-back-sjv0.onrender.com" : "http://localhost:3003/servico"
 
 
 $(document).ready(function(){
