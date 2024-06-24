@@ -7,8 +7,8 @@
 
 
 const mongodb = require("mongodb");
-const url_con = "mongodb+srv://shitonmynike:082501@joao.zzcjhw9.mongodb.net/";
-const database = "joao"
+const url_con = process.env.URL_MONGO;
+const database = process.env.DATABASE;
 
 const mongo = new mongodb.MongoClient(url_con);
 const db = mongo.db(database).collection("servicos");
@@ -68,6 +68,7 @@ async function listar(id)
 async function alterar(id , novo)
 {
     novo.data_alterado = new Date();
+    novo.preco = parseFloat(novo.preco);
     let novoId = new mongodb.ObjectId(id);
     let atualizacao = {
         $set: novo

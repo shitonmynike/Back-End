@@ -60,7 +60,7 @@ $(document).ready(function(){
         let id = $("#id-selecionado").val();
 
         
-        $.post("http://localhost:3003/servico/deletar/"+ id, function(retorno){
+        $.post("http://localhost:3003/servico/deleta/"+ id, function(retorno){
             $("#modal-delete").modal('hide');
             $("#msg-sucesso").removeClass("d-none");
             listarServicos();
@@ -108,7 +108,7 @@ $(document).ready(function(){
             "tipo": $('[name="tipo"]:checked').val(),
           };
 
-          $.post("http://localhost:3003/servico/alterar/"+id, novo, function(){
+          $.post("http://localhost:3003/servico/altera/"+id, novo, function(){
               $("#msg-sucesso").removeClass("d-none");
               $("#msg-sucesso").html("O serviço foi cadastrado");
               $("#modal-cadastrar").modal('hide');
